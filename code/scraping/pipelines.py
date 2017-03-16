@@ -147,7 +147,7 @@ class WriteItemPipelineReview(object):
         elif item['movieID'] > 0:
             idCol = 'movieID'
             id = item['movieID']
-        elif item['tvShowID']:
+        elif item['tvShowID'] > 0:
             idCol = 'tvShowID'
             id = item['tvShowID']
 
@@ -171,7 +171,7 @@ class WriteItemPipelineReview(object):
                     "(" + idCol + ", author, publication, text, score, date, thumbsUp, thumbsDown, reviewType) "\
                 "VALUES " \
                     "(" + str(id) + ", '" + item['author'] + "', '" + item['publication'] + "', '" + item['text'].replace('"', '').replace("'", "") + "', " + \
-                    str(item['score']) + ", '" + str(dtInsert) + "', " + str(item['thumbsUp']) + ", " + str(item['thumbsDown']) + ", '" + item['reviewType'] + "')"
+                    str(item['score'] if item['score'] != '' else 0) + ", '" + str(dtInsert) + "', " + str(item['thumbsUp']) + ", " + str(item['thumbsDown']) + ", '" + item['reviewType'] + "')"
 
             self.cur.execute(sqlString)
             self.con.commit()
