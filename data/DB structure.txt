@@ -1,0 +1,56 @@
+sqlite> .schema tblGame
+CREATE TABLE
+	tblGame (
+		name TEXT,
+		link TEXT,
+		image TEXT,
+		developer TEXT,
+		genre TEXT,
+		rating TEXT,
+		rlsDate TEXT,
+		summary TEXT
+	);
+
+sqlite> .schema tblMovie
+CREATE TABLE
+	tblMovie (
+		name TEXT,
+		date TEXT,
+		link TEXT,
+		image TEXT,
+		genre TEXT,
+		rlsDate TEXT,
+		runtime INT,
+		director TEXT,
+		summary TEXT,
+		rating TEXT
+	);
+
+sqlite> .schema tblReview
+CREATE TABLE
+	tblReview (
+		gameID INT,
+		movieID INT,
+		tvShowID INT,
+		author TEXT,
+		publication TEXT,
+		text TEXT,
+		score INT,
+		date TEXT,
+		thumbsUp INT,
+		thumbsDown INT,
+		reviewType TEXT
+	);
+
+CREATE TABLE
+	tblTVShow (
+		name TEXT,
+		date TEXT,
+		link TEXT,
+		image TEXT,
+		genre TEXT,
+		rlsDate TEXT,
+		runtime INT,
+		creator TEXT,
+		summary TEXT
+	);
