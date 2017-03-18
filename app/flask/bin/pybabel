@@ -1,0 +1,10 @@
+#!/Users/yvonnelau/Desktop/nyc-data-science/project-4_capstone/nycdsa-proj-04/app/flask/bin/python
+# EASY-INSTALL-ENTRY-SCRIPT: 'Babel==2.3.4','console_scripts','pybabel'
+__requires__ = 'Babel==2.3.4'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('Babel==2.3.4', 'console_scripts', 'pybabel')()
+    )

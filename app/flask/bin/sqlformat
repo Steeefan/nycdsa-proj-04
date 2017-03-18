@@ -1,0 +1,10 @@
+#!/Users/yvonnelau/Desktop/nyc-data-science/project-4_capstone/nycdsa-proj-04/app/flask/bin/python
+# EASY-INSTALL-ENTRY-SCRIPT: 'sqlparse==0.2.3','console_scripts','sqlformat'
+__requires__ = 'sqlparse==0.2.3'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('sqlparse==0.2.3', 'console_scripts', 'sqlformat')()
+    )
