@@ -86,7 +86,7 @@
     </header>
 
     <!-- Services Section -->
-    <section id="services">
+    <!--section id="services">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -121,6 +121,45 @@
                 </div>
             </div>
         </div>
+    </section-->
+    <section id="services">
+    	<div class="container">
+    		<div class="row">
+    			<select>
+    				{% for dev in devs %}
+    				<option>
+    					{{ dev.developer }}
+    				</option>
+						{% endfor %}
+    			</select>
+    			<table id="games">
+    				<tr>
+    					<th>
+    						Name
+    					</th>
+    					<th>
+    						Link
+    					</th>
+    					<th>
+    						Developer
+    					</th>
+    				</tr>
+						{% for game in games %}
+						<tr>
+							<td>
+								{{ game.name }}
+							</td>
+							<td>
+								{{ game.link }}
+							</td>
+							<td>
+								{{ game.developer }}
+							</td>
+						</tr>
+						{% endfor %}
+    			</table>
+    		</div>
+    	</div>
     </section>
 
     <!-- Portfolio Grid Section -->
