@@ -14,8 +14,3 @@ with open('summary_critics_docvecs.pickle', 'rb') as f:
 
 # get recommendaiton 
 dt = hp.content_recommend(397, 5, summary_critics_docvecs)
-print dt[0]
-print dt[1]
-print dt[2]
-print dt[3]
-print dt[4]
