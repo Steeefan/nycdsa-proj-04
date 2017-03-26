@@ -3,7 +3,6 @@ import numpy as np
 import pandas as pd
 import pickle
 import copy
-import sqlite3
 
 # import helpers function 
 import content_helpers as hp
@@ -12,11 +11,11 @@ import content_helpers as hp
 with open('summary_critics_docvecs.pickle', 'rb') as f:
     summary_critics_docvecs = pickle.load(f)
 
-# load games dataset
-conn = sqlite3.connect('capstone.db')
-games = pd.read_sql_query("select * from tblGame;", conn)
-games['gameID'] = games.index + 1
 
 # get recommendaiton 
-dt = hp.recommend(397, 5, games, summary_critics_docvecs)
-print dt['name'][4]
+dt = hp.content_recommend(397, 5, summary_critics_docvecs)
+print dt[0]
+print dt[1]
+print dt[2]
+print dt[3]
+print dt[4]
