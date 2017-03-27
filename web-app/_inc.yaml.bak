@@ -1,0 +1,6 @@
+mysql:
+    server: steeefan-capstone-db.c6i3a5xflkbo.us-west-2.rds.amazonaws.com
+    port: 3306
+    db: capstone
+    user: admin
+    pwd: 0+7q6?eq!!xe97a

@@ -11,11 +11,11 @@ class TVShowReviewsSpider(scrapy.Spider):
 
     custom_settings = {
         'ITEM_PIPELINES': {
-            'scraping.pipelines.WriteItemPipelineReview': 100
+            'scraping.pipelines.WriteItemPipelineTVShowReview': 100
         }
     }
 
-    con = lite.connect(r'D:\capstone.db')
+    con = lite.connect(r'D:\capstone-tvshows.db')
     cur = con.cursor()
     cur.execute('SELECT DISTINCT tvs.link FROM tblTVShow tvs LEFT JOIN tblReview r ON tvs.ROWID = r.tvShowID WHERE r.tvShowID IS NULL;') #only for movies where no critic reviews are present
     rows = cur.fetchall()
