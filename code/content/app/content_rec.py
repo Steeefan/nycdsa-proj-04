@@ -13,4 +13,4 @@ with open('summary_critics_docvecs.pickle', 'rb') as f:
 
 
 # get recommendaiton 
-dt = hp.content_recommend(397, 5, summary_critics_docvecs)
+dt = hp.content_recommend(397, 5, summary_critics_docvecs,["movies"])
