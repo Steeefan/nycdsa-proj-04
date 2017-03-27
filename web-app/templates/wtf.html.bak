@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="rcmApp">
+<head>    
+  	<!-- Angular Material style sheet -->
+  	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
+</head>
+
+<body id="page-top" class="index" ng-controller="statsCtrl as ctrl">
+
+
+		{%raw%}
+		<md-autocomplete flex
+	      md-selected-item="ctrl.selectedItem"
+	      md-search-text="ctrl.searchText"
+	      md-items="item in ctrl.qrySearch(ctrl.searchText)"
+	      md-item-text="item.name"
+	      md-delay="300"
+	      md-floating-label="Games">
+	    <div layout="row" class="item" layout-align="start center">
+	      <span md-highlight-text="ctrl.searchText">{{item.name}}</span>  
+	    </div>
+	    
+	    
+	  </md-autocomplete>
+	  {%endraw%}
+
+
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    
+    
+    <script>
+	    'use strict'
+	    var app = angular.module('rcmApp', ['ngMaterial', 'ngMessages'])
+	    	.controller('statsCtrl', function($scope, $http) {
+	    		var self = this;
+	    		
+	    		self.qrySearch = qrySearch;
+	    		
+					function qrySearch(query) {
+						return $http.get('/getGameList', {params: {game: query}})
+						.then(function(response) {
+							console.log(response)
+							return response.data.items;
+						})
+					}
+
+	      	//$scope.getGames();
+		   		//$scope.getDevs();
+	    		//$scope.getSystems();
+	    });
+    </script>
+
+</body>
+
+</html>

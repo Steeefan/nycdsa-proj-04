@@ -15,16 +15,20 @@ class MovieReviewsSpider(scrapy.Spider):
         }
     }
 
-    con = lite.connect(r'D:\capstone.db')
+    con = lite.connect(r'D:\capstone-v2.db')
     cur = con.cursor()
-    cur.execute('SELECT DISTINCT m.link FROM tblMovie m LEFT JOIN tblReview r ON m.ROWID = r.movieID WHERE r.movieID IS NULL;') #only for movies where no critic reviews are present
-    rows = cur.fetchall()
+    #cur.execute('SELECT DISTINCT m.link FROM tblMovie m LEFT JOIN tblReview r ON m.ROWID = r.movieID WHERE r.movieID IS NULL;') #only for movies where no critic reviews are present
+    #rows = cur.fetchall()
     start_urls = []
-    [start_urls.append('http://www.metacritic.com' + row[0] + '/critic-reviews') for row in rows]
-    [start_urls.append('http://www.metacritic.com' + row[0] + '/user-reviews') for row in rows]
+    #[start_urls.append('http://www.metacritic.com' + row[0] + '/critic-reviews') for row in rows]
+    # [start_urls.append('http://www.metacritic.com' + row[0] + '/user-reviews') for row in rows]
 
-    # cur.execute('SELECT DISTINCT g.link FROM tblGame g;')  # no user reviews so far, so get them all
-    # [start_urls.append('http://www.metacritic.com' + row[0] + '/user-reviews') for row in cur.fetchall()]
+    #cur.execute('SELECT m.link FROM tblMovie m LEFT JOIN tblMovieTmp mt ON m.ROWID = mt.movieID WHERE mt.movieID IS NULL;')  # no user reviews so far, so get them all
+    #strSQL = 'SELECT m.link FROM tblMovie m LEFT JOIN tblMovieTmp mt ON m.ROWID = mt.movieID WHERE mt.movieID IS NULL;'
+    strSQL = ''
+    cur.execute(strSQL)
+    rows = cur.fetchall()
+    [start_urls.append('http://www.metacritic.com' + row[0] + '/user-reviews') for row in rows]
     # start_urls = [
     #     'http://www.metacritic.com/movie/moonlight-2016/critic-reviews',
     #     'http://www.metacritic.com/movie/moonlight-2016/user-reviews'

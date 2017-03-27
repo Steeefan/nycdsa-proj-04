@@ -126,14 +126,14 @@
     	<div class="container">
     		<div class="row">
     			<form action="/filter" method="POST">
-	    			<select name="developer">
-	    				{% for dev in devs %}
-	    				<option>
-	    					{{ dev.developer }}
-	    				</option>
-							{% endfor %}
-	    			</select>
-	    			<button type="submit">Filter</button>
+    			<select name="developer">
+    				{% for dev in devs %}
+    				<option>
+    					{{ dev.developer }}
+    				</option>
+						{% endfor %}
+    			</select>
+    			<button type="submit">Filter</button>
     			</form>
     			<table id="games">
     				<tr>

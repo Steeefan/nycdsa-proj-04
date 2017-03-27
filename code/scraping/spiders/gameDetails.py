@@ -7,11 +7,12 @@ class GameDetailsSpider(scrapy.Spider):
     name = "gamedetailsspider"
     allowed_domains = ["metacritic.com"]
 
-    con = lite.connect(r'D:\capstone.db')
+    con = lite.connect(r'D:\capstone-v2.db')
     cur = con.cursor()
-    cur.execute('SELECT link FROM tblGame WHERE developer==""')
+    cur.execute('SELECT link FROM tblGame WHERE developer IS NULL')
+    rows = cur.fetchall()
     start_urls = []
-    [start_urls.append('http://www.metacritic.com' + row[0]) for row in cur.fetchall()]
+    [start_urls.append('http://www.metacritic.com' + row[0]) for row in rows]
     #start_urls = ['http://www.metacritic.com/game/playstation-4/grand-theft-auto-v']
 
     custom_settings = {

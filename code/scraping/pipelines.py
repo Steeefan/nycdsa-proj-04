@@ -6,7 +6,7 @@ import datetime
 class WriteItemPipelineGamesList(object):
     def __init__(self):
         # Possible we should be doing this in spider_open instead, but okay
-        self.con = lite.connect(r'D:\capstone.db')
+        self.con = lite.connect(r'D:\capstone-v2.db')
         self.cur = self.con.cursor()
         logging.basicConfig(filename='spider.log', level=logging.DEBUG,
                             format='%(asctime)s - %(levelname)s - %(message)s');
@@ -95,7 +95,7 @@ class WriteItemPipelineTVShowsList(object):
 class WriteItemPipelineGameDetails(object):
     def __init__(self):
         # Possible we should be doing this in spider_open instead, but okay
-        self.con = lite.connect(r'D:\capstone.db')
+        self.con = lite.connect(r'D:\capstone-v2.db')
         self.cur = self.con.cursor()
         logging.basicConfig(filename='spider.log', level=logging.DEBUG,
                             format='%(asctime)s - %(levelname)s - %(message)s');
@@ -134,7 +134,7 @@ class WriteItemPipelineGameDetails(object):
 class WriteItemPipelineReview(object):
     def __init__(self):
         # Possible we should be doing this in spider_open instead, but okay
-        self.con = lite.connect(r'D:\capstone.db')
+        self.con = lite.connect(r'D:\capstone-v2.db')
         self.cur = self.con.cursor()
         logging.basicConfig(filename='spider.log', level=logging.DEBUG,
                             format='%(asctime)s - %(levelname)s - %(message)s');
@@ -260,3 +260,55 @@ class WriteItemPipelineTVShowDetails(object):
 
     def handle_error(self, e):
         logging.debug(e)
+
+
+# class WriteItemPipelineTVShowReview(object):
+#     def __init__(self):
+#         # Possible we should be doing this in spider_open instead, but okay
+#         self.con = lite.connect(r'D:\capstone-tvshows.db')
+#         self.cur = self.con.cursor()
+#         logging.basicConfig(filename='spider.log', level=logging.DEBUG,
+#                             format='%(asctime)s - %(levelname)s - %(message)s');
+#
+#     # Take the item and put it in database - do not allow duplicates
+#     def process_item(self, item, spider):
+#         if item['gameID'] > 0:
+#             idCol = 'gameID'
+#             id = item['gameID']
+#         elif item['movieID'] > 0:
+#             idCol = 'movieID'
+#             id = item['movieID']
+#         elif item['tvShowID'] > 0:
+#             idCol = 'tvShowID'
+#             id = item['tvShowID']
+#
+#         self.cur.execute(
+#             "SELECT * FROM tblReview WHERE " + idCol + "=" + str(id) + " AND " \
+#             "(publication='" + item['publication'] + "' OR author='" + item['author'] + "')"
+#         )
+#         result = self.cur.fetchone()
+#         result = False
+#         if result:
+#             logging.debug("Item already in database: %s" % item)
+#         else:
+#             if item['date'] != '':
+#                 dtInsert = datetime.datetime.strptime(item['date'], '%b %d, %Y')
+#             else:
+#                 dtInsert = ''
+#
+#             sqlString = \
+#                 "INSERT INTO " \
+#                     "tblReview" \
+#                     "(" + idCol + ", author, publication, text, score, date, thumbsUp, thumbsDown, reviewType) "\
+#                 "VALUES " \
+#                     "(" + str(id) + ", '" + item['author'] + "', '" + item['publication'] + "', '" + item['text'].replace('"', '').replace("'", "") + "', " + \
+#                     str(item['score'] if item['score'] != '' else 0) + ", '" + str(dtInsert) + "', " + str(item['thumbsUp']) + ", " + str(item['thumbsDown']) + ", '" + item['reviewType'] + "')"
+#
+#             self.cur.execute(sqlString)
+#             self.con.commit()
+#
+#             logging.debug("Item inserted: " + item['link'])
+#         return item
+#
+#     def handle_error(self, e):
+#         logging.debug(e)

@@ -15,14 +15,16 @@ class GameCriticReviewsSpider(scrapy.Spider):
         }
     }
 
-    con = lite.connect(r'D:\capstone.db')
+    con = lite.connect(r'D:\capstone-v2.db')
     cur = con.cursor()
-    cur.execute('SELECT DISTINCT g.link FROM tblGame g LEFT JOIN tblReview r ON g.ROWID = r.gameID WHERE r.gameID IS NULL;') #only for games where no critic reviews are present
     start_urls = []
-    [start_urls.append('http://www.metacritic.com' + row[0] + '/critic-reviews') for row in cur.fetchall()]
+    # cur.execute('SELECT DISTINCT g.link FROM tblGame g LEFT JOIN tblReview r ON g.ROWID = r.gameID WHERE r.gameID IS NULL;') #only for games where no critic reviews are present
+    # [start_urls.append('http://www.metacritic.com' + row[0] + '/critic-reviews') for row in cur.fetchall()]
 
-    cur.execute('SELECT DISTINCT g.link FROM tblGame g;')  # no user reviews so far, so get them all
-    [start_urls.append('http://www.metacritic.com' + row[0] + '/user-reviews') for row in cur.fetchall()]
+    strSQL = 'SELECT g.link FROM tblGame g LEFT JOIN tblGameTmp gt ON g.ROWID = gt.gameID WHERE gt.gameID IS NULL;'
+    cur.execute(strSQL)  # no user reviews for abovementioned games
+    rows = cur.fetchall()
+    [start_urls.append('http://www.metacritic.com' + row[0] + '/user-reviews') for row in rows]
     # start_urls = [
     #     'http://www.metacritic.com/game/playstation-4/grand-theft-auto-v/critic-reviews',
     #     'http://www.metacritic.com/game/playstation-4/grand-theft-auto-v/user-reviews'
@@ -33,8 +35,8 @@ class GameCriticReviewsSpider(scrapy.Spider):
             lastPageNumber = int(response.xpath('//li[@class="page last_page"]/a/text()').extract()[0])
             return lastPageNumber
         except:
-            logging.log(logging.DEBUG, 'Some error on page', response.url)
-            return 0
+            logging.info('Some error on page with page num nshit: ' + response.url)
+            return -1
 
     def parse(self, response):
         if response.url.find('/critic-reviews') > 0:
@@ -43,20 +45,27 @@ class GameCriticReviewsSpider(scrapy.Spider):
         elif response.url.find('/user-reviews') > 0:
             # User reviews can have multiple pages
             last_page_number = self.lastPageNumber(response)
+            logging.info('pgnum: ' + str(last_page_number))
+
             if last_page_number < 0:
-                return
+                logging.info('wtf')
+                yield scrapy.Request(response.url, callback=self.parse_listings_results_page)
             else:
                 page_urls = [response.url + "?page=" + str(pageNumber) for pageNumber in range(0, last_page_number)]
                 for page_url in page_urls:
                     yield scrapy.Request(page_url, callback=self.parse_listings_results_page)
 
     def parse_listings_results_page(self, response):
+        logging.info('wtf2')
+
         item = ReviewItem()
         link = response.url.replace('http://www.metacritic.com', '').replace('/critic-reviews', '').replace('/user-reviews', '')
         link = re.sub("\?page=\d{1,3}", '', link)
 
-        con = lite.connect(r'D:\capstone.db')
+        con = lite.connect(r'D:\capstone-v2.db')
         cur = con.cursor()
+
+        logging.info('wtf3')
 
         cur.execute("SELECT ROWID FROM tblGame WHERE link = '" + link + "'")
         gameID = cur.fetchone()[0]

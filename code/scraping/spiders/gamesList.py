@@ -23,13 +23,13 @@ class GamesListSpider(scrapy.Spider):
             lastPageNumber = int(response.xpath('//li[@class="page last_page"]/a/text()').extract()[0])
             return lastPageNumber
         except:
-            logging.log(logging.DEBUG, 'Some error on page', response.url)
-            return 0
+            logging.debug('Only one page for ' + response.url)
+            return -1
 
     def parse(self, response):
         last_page_number = self.lastPageNumber(response)
         if last_page_number < 0:
-            return
+            yield scrapy.Request(response.url, callback=self.parse_listings_results_page)
         else:
             page_urls = [response.url + "?page=" + str(pageNumber) for pageNumber in range(0, last_page_number)]
             for page_url in page_urls:
@@ -39,6 +39,6 @@ class GamesListSpider(scrapy.Spider):
         item = GamesListItem()
 
         for element in response.xpath('//*[@id="main"]/div[1]/div[2]/div[3]/div/ol[@class="list_products list_product_condensed"]/li').extract():
-            item['name'] = str(Selector(text=element).xpath('//li/div/div[@class="basic_stat product_title"]/a/text()').extract()[0].strip())
-            item['link'] = str(Selector(text=element).xpath('//li/div/div[@class="basic_stat product_title"]/a/@href').extract()[0].strip())
+            item['name'] = str(Selector(text=element).xpath('//li/div/div[@class="basic_stat product_title"]/a/text()').extract()[0].encode('utf-8').strip())
+            item['link'] = str(Selector(text=element).xpath('//li/div/div[@class="basic_stat product_title"]/a/@href').extract()[0].encode('utf-8').strip())
             yield item

@@ -1,0 +1,26 @@
+    			<table id="games">
+    				<tr>
+    					<th>
+    						Name
+    					</th>
+    					<th>
+    						Link
+    					</th>
+    					<th>
+    						Developer
+    					</th>
+    				</tr>
+						{% for game in games %}
+						<tr>
+							<td>
+								{{ game.name }}
+							</td>
+							<td>
+								<a href="http://www.metacritic.com{{ game.link }}" target="_blank">Details on metacritic.com</a>
+							</td>
+							<td>
+								{{ game.developer }}
+							</td>
+						</tr>
+						{% endfor %}
+    			</table>
