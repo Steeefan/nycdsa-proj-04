@@ -11,8 +11,8 @@ import re
 from sent_predict import cleaning_text
 from sent_predict import sentiment_predictor
 
-input = 'I loved the game! It was awesome'
-rating = 3
+#input = 'I loved the game! It was awesome'
+#rating = 3
 
 
 sentiment_predictor(input, rating)
