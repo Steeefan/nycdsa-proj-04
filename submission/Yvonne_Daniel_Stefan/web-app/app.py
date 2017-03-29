@@ -24,26 +24,26 @@ cfg = yaml.safe_load(open('_inc.yaml'))
 modelFiles = ['item_item_matrix.pickle', 'summary_critics_docvecs.pickle', 'tk.pickle', 'user_item_matrix.pickle']
 
 # Contend-based
-summary_critics_docvecs = pickle.load(open('D:/models/summary_critics_docvecs-bin.pickle', 'rb'))
-# summary_critics_docvecs = pickle.loads(urllib2.urlopen('http://steeefan-bkt-03.s3.amazonaws.com/models/summary_critics_docvecs-bin.pickle').read())
+# summary_critics_docvecs = pickle.load(open('D:/models/summary_critics_docvecs-bin.pickle', 'rb'))
+summary_critics_docvecs = pickle.loads(urllib2.urlopen('http://steeefan-bkt-03.s3.amazonaws.com/models/summary_critics_docvecs-bin.pickle').read())
 # summary_critics_docvecs = -1
 
 # Collaborative
-user_item_matrix = pickle.load(open('D:/models/user_item_matrix_smaller-bin.pickle', 'rb'))
-# user_item_matrix = pickle.loads(urllib2.urlopen('http://steeefan-bkt-03.s3.amazonaws.com/models/user_item_matrix_smaller-bin.pickle').read())
++ user_item_matrix = pickle.load(open('D:/models/user_item_matrix_smaller-bin.pickle', 'rb'))
+user_item_matrix = pickle.loads(urllib2.urlopen('http://steeefan-bkt-03.s3.amazonaws.com/models/user_item_matrix_smaller-bin.pickle').read())
 # user_item_matrix = -1
 
 # Item
-item_item_matrix = pickle.load(open('D:/models/item_item_matrix-bin.pickle', 'rb'))
-# item_item_matrix = pickle.loads(urllib2.urlopen('http://steeefan-bkt-03.s3.amazonaws.com/models/item_item_matrix-bin.pickle').read())
+# item_item_matrix = pickle.load(open('D:/models/item_item_matrix-bin.pickle', 'rb'))
+item_item_matrix = pickle.loads(urllib2.urlopen('http://steeefan-bkt-03.s3.amazonaws.com/models/item_item_matrix-bin.pickle').read())
 # item_item_matrix = -1
 
 # Sentiment
-tk = pickle.load(open('D:/models/tk-bin-v2.pickle', 'rb'))
-# tk = pickle.loads(urllib2.urlopen('http://steeefan-bkt-03.s3.amazonaws.com/models/tk-bin.pickle').read())
+# tk = pickle.load(open('D:/models/tk-bin-v2.pickle', 'rb'))
+tk = pickle.loads(urllib2.urlopen('http://steeefan-bkt-03.s3.amazonaws.com/models/tk-bin.pickle').read())
 # tk = -1
-h5 = load_model('D:/models/sentiment_model-bin.h5')
-# h5 = load_model(urllib2.urlopen('http://steeefan-bkt-03.s3.amazonaws.com/models/sentiment_model-bin.h5').read())
+# h5 = load_model('D:/models/sentiment_model-bin.h5')
+h5 = load_model(urllib2.urlopen('http://steeefan-bkt-03.s3.amazonaws.com/models/sentiment_model-bin.h5').read())
 # h5 = -1
 
 def sqlCon():

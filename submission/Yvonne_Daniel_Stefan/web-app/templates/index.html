@@ -59,9 +59,6 @@
                     <li>
                         <a class="page-scroll" href="#recommendations">Recommendations</a>
                     </li>
-                    <!--li>
-                        <a class="page-scroll" href="#portfolio">Portfolio</a>
-                    </li-->
                     <li>
                         <a class="page-scroll" href="#stats">Stats</a>
                     </li>
@@ -71,9 +68,6 @@
                     <li>
                         <a class="page-scroll" href="#team">Team</a>
                     </li>
-                    <!--li>
-                        <a class="page-scroll" href="#contact">Team</a>
-                    </li-->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -564,48 +558,37 @@
 
    <!-- Stats Section -->
     <section id="stats" class="bg-light-gray">
-        <div class="container">
-            <div class="row">
-              <div class="col-lg-12 text-center">
-                  <h2 class="section-heading">Stats</h2>
-                  <h3 class="section-subheading text-muted">What's in this thing?</h3>
-              </div>
-              
-              <div class="col-lg-2">
-								<!--md-input-container>
-									<label>Developer</label>
-					        <md-select ng-model="devs" ng-change="showGames()">
-					          <md-option ng-repeat="dev in devs" value="{{ '{{dev.dev}}' }}">{{ '{{dev.dev}}' }}</md-option>
-					        </md-select>
-	              </md-input-container-->
-	            </div>
-	            
-	            <div class="col-lg-2">
-								<!--md-input-container>
-									<label>System</label>
-					        <md-select ng-model="systems" ng-change="showGames()">
-					          <md-option ng-repeat="sys in systems" value="{{ '{{sys.system}}' }}">{{ '{{sys.system}}' }}</md-option>
-					        </md-select>
-	              </md-input-container-->
-          		</div>
-          </div>
-	          <div class="row">
-							<div class="col-lg-12">
-                <!--table>
-                    <tr>
-                        <th>Name</th>
-                        <th>Developer</th>
-                        <th>System</th>
-                    </tr>
-                    <tr ng-repeat="game in ctrl.querySearch('Zelda') track by $index">
-                        <td><a href="http://www.metacritic.com{{ '{{game.link}}' }}" target="_blank">{{ '{{game.name}}' }}</a></td>
-                        <td>{{ '{{game.developer}}' }}</td>
-                        <td>{{ '{{game.system}}' }}</td>
-                    </tr>
-                </table-->
-              </div>
-            </div>
-        </div>
+	    <div class="row">
+	        <div class="col-lg-12 text-center">
+	            <h2 class="section-heading">Stats</h2>
+	            <h3 class="section-subheading text-muted">What's in this thing?</h3>
+	        </div>
+	    </div>
+			<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-4" style="text-align:center;">
+					<img src="static/img/eda/games-by-genre.png" alt="Games6 by genre" title="Games by genre" style="height: 400px;">
+				</div>
+				<div class="col-md-2"></div>
+				<div class="col-md-4" style="text-align:center;">
+					<img src="static/img/eda/games-by-system.png" alt="Games6 by genre" title="Games by genre" style="height: 400px;">
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			<p></p>
+			<p></p>
+			<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-4" style="text-align:center;">
+					<img src="static/img/eda/Critic_review_dist.png" alt="Games6 by genre" title="Games by genre" style="height: 400px;">
+				</div>
+				<div class="col-md-2"></div>
+				<div class="col-md-4" style="text-align:center;">
+					<img src="static/img/eda/User_review_dist.png" alt="Games6 by genre" title="Games by genre" style="height: 400px;">
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			</div>
     </section>
 
     <!-- About Section -->
@@ -902,6 +885,7 @@
 						$scope.review = '';
 						$scope.reviewGrade = null;
 					};
+				});
     </script>
 
 </body>
