@@ -1,0 +1,32 @@
+    			<table id="games">
+    				<tr>
+    					<th>
+    						ID
+    					</th>
+    					<th>
+    						index
+    					</th>
+    					<th>
+    						cossim
+    					</th>
+    					<th>
+    						name
+    					</th>
+    				</tr>
+						{% for game in games %}
+						<tr>
+							<td>
+								{{ game.gameID }}
+							</td>
+							<td>
+								{{ game.index }}
+							</td>
+							<td>
+								{{ game.cossim }}
+							</td>
+							<td>
+								{{ game.name }}}
+							</td>
+						</tr>
+						{% endfor %}
+    			</table>
